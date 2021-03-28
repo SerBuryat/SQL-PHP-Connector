@@ -35,9 +35,25 @@ class DB
         return $stmn->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /*public function getTableRowById(string $tableName, int $id): array {
-        $stmn = $this->connection->query('SELECT * FROM '.$tableName.'WHERE id='.$id);
+    /** Return row from db TABLE by ID key
+     * @param string $tableName
+     * @param int $id
+     * @return array
+     */
+    public function getTableRowById(string $tableName, int $id): array {
+        $stmn = $this->connection->query('SELECT * FROM '.$tableName.' WHERE id = '.$id);
         return $stmn->fetch(PDO::FETCH_ASSOC);
-    }*/
+    }
+
+    /** Return rows from db TABLE by range (offset and limit)
+     * @param string $tableName
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
+    public function getTableRowsByRange(string $tableName, int $limit, int $offset): array {
+        $stmn = $this->connection->query('SELECT * FROM '.$tableName.' LIMIT '.$limit.' OFFSET '.$offset );
+        return $stmn->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
