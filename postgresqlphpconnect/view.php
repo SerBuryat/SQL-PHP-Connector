@@ -11,13 +11,28 @@
     } catch (PDOException | Exception $e) {
         echo $e->getMessage();
     }
+
+    $title = htmlspecialchars_decode($news['title']);
+    $content = htmlspecialchars_decode($news['content']);
     ?>
 
-<!-- News page -->
-<div>
-    <h1> News <?php echo htmlspecialchars_decode($news['id']) ?>: </h1>
-    <hr>
-    <p> <?php echo htmlspecialchars_decode($news['title']) ?> </p>
-    <hr>
-    <a href="news.php"> Все новости >> </a>
-</div>
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <title> <?php echo $title ?> </title>
+        <link rel='stylesheet' type='text/css' href='app/css/style.css'>
+    </head>
+    <body>
+        <!-- News page -->
+        <div class="page-container">
+            <div class="news-container">
+                <h1> <?php echo $title ?>: </h1>
+                <hr>
+                <p> <?php echo $content ?> </p>
+                <hr>
+                <!-- Back to main page -->
+                <a href="news.php"> Все новости >> </a>
+            </div>
+        </div>
+    </body>
+</html>

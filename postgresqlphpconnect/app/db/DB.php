@@ -45,14 +45,15 @@ class DB
         return $stmn->fetch(PDO::FETCH_ASSOC);
     }
 
-    /** Return rows from db TABLE by range (offset and limit)
+    /** Return rows from db TABLE by parameters (offset, limit. order by)
      * @param string $tableName
      * @param int $limit
      * @param int $offset
+     * @param string $orderByColumn
      * @return array
      */
-    public function getTableRowsByRange(string $tableName, int $limit, int $offset): array {
-        $stmn = $this->connection->query('SELECT * FROM '.$tableName.' LIMIT '.$limit.' OFFSET '.$offset );
+    public function getTableRowsByParameters(string $tableName, int $limit, int $offset, string $orderByColumn): array {
+        $stmn = $this->connection->query('SELECT * FROM '.$tableName.' ORDER BY ' .$orderByColumn. ' DESC'.' LIMIT '.$limit.' OFFSET '.$offset);
         return $stmn->fetchAll(PDO::FETCH_ASSOC);
     }
 
